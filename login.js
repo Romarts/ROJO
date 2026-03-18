@@ -1,0 +1,65 @@
+// login.js
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("loginForm");
+  const feedback = document.getElementById("feedback");
+  const toggle = document.getElementById("togglePwd");
+  const pwd = document.getElementById("password");
+
+  toggle.addEventListener("click", () => {
+    const type = pwd.type === "password" ? "text" : "password";
+    pwd.type = type;
+    toggle.textContent = type === "password" ? "👁️" : "🙈";
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    feedback.textContent = "";
+    const email = document.getElementById("email").value.trim();
+    const password = pwd.value;
+
+    if (!email || !password) {
+      feedback.textContent = "Preencha e‑mail e senha.";
+      return;
+    }
+
+    // Validação simples de e-mail
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!re.test(email)) {
+      feedback.textContent = "E‑mail inválido.";
+      return;
+    }
+
+    // Desabilita botão enquanto processa
+    const submitBtn = document.getElementById("submitBtn");
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Entrando...";
+
+    try {
+      const res = await fetch("/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        feedback.textContent = data.msg || "Erro ao autenticar.";
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Entrar";
+        return;
+      }
+
+      // Sucesso: armazena token e redireciona
+      if (data.token) {
+        localStorage.setItem("rojo_token", data.token);
+      }
+      localStorage.setItem("rojo_user", JSON.stringify({ email }));
+      window.location.href = "index.html";
+    } catch (err) {
+      feedback.textContent = "Erro de conexão. Tente novamente.";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Entrar";
+    }
+  });
+});

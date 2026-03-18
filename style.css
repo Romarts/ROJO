@@ -1,0 +1,269 @@
+body {
+  margin: 0;
+  font-family: "Merriweather", serif;
+  background: #faf7f2;
+  color: #1a1a1a;
+  line-height: 1.6;
+}
+
+.site-header {
+  background: transparent;
+  padding: 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 100;
+}
+
+.brand {
+  font-family: "Playfair Display", serif;
+  font-size: 26px;
+  letter-spacing: 8px;
+  color: #D4AF37; /* Dourado Metálico */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  text-decoration: none;
+}
+
+/* --- ESTILO DO BOTÃO HAMBÚRGUER --- */
+.menu-btn {
+  display: none; /* Escondido no PC */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 101;
+}
+
+.menu-btn span {
+  display: block;
+  width: 25px;
+  height: 2px;
+  background-color: #D4AF37;
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.nav a {
+  color: #C5A059; /* Dourado suave para leitura */
+  margin-left: 35px;
+  text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: 0.3s;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.nav a:hover {
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.hero {
+  background: url("imagens/Apresentacao.png") top center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Ajuste na Linha Separadora */
+.linha-separadora {
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.3); /* Dourado sutil da ROJO */
+  margin: 0; /* Remove o espaço em cima e embaixo da linha */
+  width: 100%;
+}
+
+/* Ajuste nas Seções para não criarem vácuo */
+.colecao, .secao-informativa {
+  padding-top: 60px;    
+  padding-bottom: 60px; 
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Limpeza de filtros antigos */
+.hero::before, .hero::after {
+  content: none !important;
+}
+
+.hero-content {
+  position: relative;
+  color: white;
+  z-index: 10;
+  transform: translate(-20px, -40px); 
+  text-shadow: 0 2px 15px rgba(0,0,0,0.6);
+}
+
+.hero-content small {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.hero-content h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 90px;
+  margin: 10px 0;
+  line-height: 1.1;
+}
+
+.hero-content p {
+  font-style: italic;
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+.btn-three {
+  color: #FFF;
+  transition: all 0.5s;
+  position: relative;
+  padding: 15px 50px; 
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block; 
+  cursor: pointer;
+  border: 1px solid rgba(212, 175, 55, 0.5); /* Borda dourada sutil */
+}
+
+.btn-three::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: -1;
+  background-color: rgba(255,255,255,0.05);
+  transition: all 0.3s;
+}
+
+.btn-three:hover {
+  background: #D4AF37;
+  color: #000;
+}
+
+.colecao {
+  padding: 80px 40px;
+  text-align: center;
+  background: #fdfaf5;
+}
+
+.titulo-secao {
+  color: #7a1b1b;
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  margin-bottom: 30px;
+  letter-spacing: 1px;
+}
+
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+}
+
+.produto {
+  background: #686465;
+  border-radius: 12px;
+  padding: 30px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.produto:hover {
+  transform: translateY(-6px);
+}
+
+.secao-informativa {
+  padding: 100px 20px;
+  text-align: center;
+  background-color: #faf7f2;
+}
+
+.secao-sobre { background-color: #dbdbdb; }
+
+.container-small {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.label-muted {
+  display: block;
+  letter-spacing: 4px;
+  color: #999;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.texto-secao {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.8;
+}
+
+.site-footer {
+  background: #0d0d0d;
+  color: #f0f0f0;
+  text-align: center;
+  padding: 35px;
+  font-size: 14px;
+  border-top: 1px solid rgba(212,175,55,0.3);
+}
+
+/* --- CONFIGURAÇÕES MOBILE (ATÉ 768px) --- */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 20px 30px;
+  }
+
+  .menu-btn {
+    display: block; /* Mostra o botão no mobile */
+  }
+
+  .nav {
+    display: none; /* Começa escondido */
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: rgba(26, 26, 26, 0.98); /* Fundo quase opaco para luxo */
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+  }
+
+  .nav a {
+    margin: 20px 0;
+    font-size: 20px; /* Links maiores no celular */
+  }
+
+  /* Classe que seu JS vai ativar */
+  .nav.active {
+    display: flex; 
+  }
+
+  /* Ajuste do título para não estourar no celular */
+  .hero-content h1 {
+    font-size: 50px;
+  }
+  
+  .hero-content {
+    transform: translate(0, 0); /* Centraliza melhor no mobile */
+  }
+}

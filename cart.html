@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ROJO — Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-logo">ROJO</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="cart.html">Carrinho</a>
+      </nav>
+    </div>
+  </header>
+
+   <main class="container page-cart">
+    <h1>Seu Carrinho</h1>
+    <ul id="cart-list" class="cart-list"></ul>
+    <div class="cart-actions">
+      <button class="btn primary" onclick="checkout()">Finalizar Compra</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <strong>ROJO</strong> — Elegância e simplicidade</small>
+    </div>
+  </footer>
+
+  <script src="cart.js"></script>
+</body>
+</html>

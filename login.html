@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ROJO — Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="brand-logo">ROJO</span>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="cart.html">Carrinho</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-login">
+    <section class="login-card">
+      <div class="login-visual">
+        <div class="accent"></div>
+        <h2>Bem-vindo à ROJO</h2>
+        <p class="muted">Experiência olfativa. Luxo minimalista.</p>
+      </div>
+
+      <form id="loginForm" class="login-form" autocomplete="off">
+        <h3>Entrar na sua conta</h3>
+
+        <label class="field">
+          <span class="label-text">E‑mail</span>
+          <input id="email" name="email" type="email" required />
+        </label>
+
+        <label class="field">
+          <span class="label-text">Senha</span>
+          <div class="password-wrap">
+            <input id="password" name="password" type="password" required minlength="6" />
+            <button type="button" id="togglePwd" class="eye" aria-label="Mostrar senha">👁️</button>
+          </div>
+        </label>
+
+        <div class="actions">
+          <button id="submitBtn" class="btn primary" type="submit">Entrar</button>
+          <a class="link-muted" href="register.html">Criar conta</a>
+        </div>
+
+        <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <strong>ROJO</strong> — Elegância e simplicidade</small>
+    </div>
+  </footer>
+
+  <script src="login.js"></script>
+</body>
+</html>
