@@ -1,31 +1,14 @@
 {
-  "name": "site-dupla",
-  "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
-  "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --exec ts-node src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "body-parser": "^2.2.2",
-    "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3"
-  },
   "devDependencies": {
+    "@prisma/client": "^6.19.3",
     "@types/bcrypt": "^6.0.0",
-    "@types/body-parser": "^1.19.6",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
-    "@types/node": "^25.5.0",
-    "nodemon": "^3.1.14",
-    "ts-node": "^10.9.2",
-    "typescript": "^6.0.2"
+    "prisma": "^6.19.3"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
   }
 }
