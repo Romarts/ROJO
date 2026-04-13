@@ -9,7 +9,20 @@ function explorar() {
   document.getElementById("colecao").scrollIntoView({ behavior: "smooth" });
 }
 
-function toggleMenu(){
+function toggleMenu() {
   const menu = document.getElementById("menu");
+  const btn = document.querySelector(".menu-btn");
+  
   menu.classList.toggle("active");
+  btn.classList.toggle("open");
 }
+
+document.querySelectorAll('#menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    const menu = document.getElementById("menu");
+    const btn = document.querySelector(".menu-btn");
+    
+    menu.classList.remove("active");
+    btn.classList.remove("open");
+  });
+});
