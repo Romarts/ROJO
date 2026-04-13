@@ -243,10 +243,13 @@ h1, h2, h3 {
 }
 
 /* Grid de Produtos */
-.produtos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 30px;
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 perfumes lado a lado no PC */
+    gap: 40px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .produto {
@@ -434,8 +437,84 @@ h1, h2, h3 {
     margin-bottom: 5px;
 }
 
+
 /* =========================================
-   8. RESPONSIVIDADE (MOBILE)
+   8. Catalogo de Produtos (PÁGINA COLEÇÃO)
+   ========================================= */
+
+/* Card Principal */
+.product-card {
+    background: #ffffff;
+    padding: 20px;
+    border: 1px solid #eee;
+    text-align: center;
+    transition: all 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Ajuste da Imagem (Para não ficar com borda quebrada) */
+.product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Garante que seja sempre um quadrado */
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+/* Tipografia */
+.product-info small {
+    color: #999;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.product-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #1a1a1a;
+}
+
+.product-info .price {
+    color: #D4AF37;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+/* O NOVO BOTÃO (Visível e Elegante) */
+.btn-add-cart {
+    background-color: #1a1a1a; /* Preto sólido para contraste total */
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-add-cart:hover {
+    background-color: #D4AF37; /* Vira dourado no hover */
+    color: #1a1a1a;
+}
+
+/* =========================================
+   9. RESPONSIVIDADE (MOBILE)
    ========================================= */
 @media (max-width: 768px) {
   .nav { 
@@ -483,4 +562,26 @@ h1, h2, h3 {
   .menu-btn.open .btn-line:nth-child(3) {
     transform: rotate(-45deg) translate(7px, -7px);
   }
+
+  .product-grid {
+        /* No celular, ele ignora as colunas e empilha tudo */
+        grid-template-columns: 1fr; 
+        gap: 30px;
+        padding: 20px;
+    }
+
+    .product-card {
+        max-width: 100%; /* O card ocupa a largura total da tela */
+        margin-bottom: 20px;
+    }
+
+    .product-image {
+        height: auto;
+        aspect-ratio: 1 / 1; /* Mantém o perfume quadrado e bonito */
+    }
+    
+    .btn-add-cart {
+        padding: 18px; /* Botão maior no celular para facilitar o toque */
+        font-size: 14px;
+    }
 }

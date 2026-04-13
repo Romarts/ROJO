@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ROJO</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+    <header class="site-header header-solid">
+        <a href="index.html" class="brand">ROJO</a>
+        
+        <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu">
+            <div class="btn-line"></div>
+            <div class="btn-line"></div>
+            <div class="btn-line"></div>
+        </button>
+    <nav class="nav" id="menu">
+      <a href="colecao.html">COLEÇÃO</a>
+      <a href="index.html#sobre">SOBRE</a>
+      <a href="index.html#contato">CONTATO</a>
+      <a href="login.html" class="nav-login">ENTRAR</a>
+      <a href="cart.html" class="nav-cart">CARRINHO</a>
+    </nav>
+    </header>
+
+
+    <main class="container catalog-container">
+        <div class="login-header">
+            <h2>Nossa Coleção</h2>
+            <p>Fragrâncias que definem presença e personalidade</p>
+        </div>
+
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="img/perfume1.jpg" alt="Noir Absolu">
+                </div>
+                <div class="product-info">
+                    <small>Masculino</small>
+                    <h3>Noir Absolu</h3>
+                    <p class="price">R$ 489,00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Noir Absolu', 489.00)">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="img/perfume2.jpg" alt="Rouge Intense">
+                </div>
+                <div class="product-info">
+                    <small>Unissex</small>
+                    <h3>Rouge Intense</h3>
+                    <p class="price">R$ 529,00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Rouge Intense', 529.00)">Adicionar</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="img/perfume3.jpg" alt="Fleur Délicate">
+                </div>
+                <div class="product-info">
+                    <small>Feminino</small>
+                    <h3>Fleur Délicate</h3>
+                    <p class="price">R$ 399,00</p>
+                    <button class="btn-add-cart" onclick="addToCart('Fleur Délicate', 399.00)">Adicionar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<footer class="site-footer">
+    <p>© ROJO — Elegância e Sofisticação</p>
+</footer>
+  <script src="script.js"></script>
+</body>
+</html> 
