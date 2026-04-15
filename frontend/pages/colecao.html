@@ -4,30 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - ROJO</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/frontend/styles/style.css">
 </head>
+
+<div id="header-placeholder"></div>
+
 <body class="login-page">
-
-    <header class="site-header header-solid">
-        <a href="index.html" class="brand">ROJO</a>
-        
-        <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu">
-            <div class="btn-line"></div>
-            <div class="btn-line"></div>
-            <div class="btn-line"></div>
-        </button>
-    <nav class="nav" id="menu">
-      <a href="colecao.html">COLEÇÃO</a>
-      <a href="index.html#sobre">SOBRE</a>
-      <a href="index.html#contato">CONTATO</a>
-      <a href="login.html" class="nav-login">ENTRAR</a>
-      <a href="cart.html" class="nav-cart">CARRINHO</a>
-    </nav>
-    </header>
-
 
     <main class="container catalog-container">
         <div class="login-header">
+            <br>
             <h2>Nossa Coleção</h2>
             <p>Fragrâncias que definem presença e personalidade</p>
         </div>
@@ -41,8 +27,7 @@
                     <small>Masculino</small>
                     <h3>Noir Absolu</h3>
                     <p class="price">R$ 489,00</p>
-                    <button class="btn-add-cart" onclick="addToCart('Noir Absolu', 489.00)">Adicionar</button>
-                </div>
+<button class="btn-add-cart" onclick="addToCart('Noir Absolu', 489.00)">Adicionar</button>                </div>
             </div>
 
             <div class="product-card">
@@ -53,8 +38,7 @@
                     <small>Unissex</small>
                     <h3>Rouge Intense</h3>
                     <p class="price">R$ 529,00</p>
-                    <button class="btn-add-cart" onclick="addToCart('Rouge Intense', 529.00)">Adicionar</button>
-                </div>
+<button class="btn-add-cart" onclick="addToCart('Rouge Intense', 529.00)">Adicionar</button>                </div>
             </div>
 
             <div class="product-card">
@@ -70,10 +54,43 @@
             </div>
         </div>
     </main>
-
+    
 <footer class="site-footer">
     <p>© ROJO — Elegância e Sofisticação</p>
 </footer>
-  <script src="script.js"></script>
+
+<div id="toast" style="display:none; position: fixed; bottom: 30px; right: 30px; background: #1a1a1a; color: #D4AF37; padding: 15px 25px; border-left: 4px solid #D4AF37; z-index: 9999; font-family: Montserrat, sans-serif; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+    Item adicionado!
+</div>
+
+<script>
+function addToCart(name, price) {
+    // Busca o carrinho ou cria um novo
+    let cart = JSON.parse(localStorage.getItem("rojo_cart")) || [];
+
+    // Adiciona o item
+    cart.push({ name: name, price: price });
+
+    // Salva na chave correta
+    localStorage.setItem("rojo_cart", JSON.stringify(cart));
+
+    // Mostra o seu Toast (Aviso)
+    const toast = document.getElementById("toast");
+    if (toast) {
+        toast.style.display = "block";
+        setTimeout(() => { toast.style.display = "none"; }, 3000);
+    }
+}
+    document.addEventListener("DOMContentLoaded", updateCartCount);
+
+    function toggleMenu() {
+  const menu = document.getElementById("menu");
+  const btn = document.querySelector(".menu-btn");
+  
+  menu.classList.toggle("active");
+  btn.classList.toggle("open");
+}
+</script>
+<script src="/frontend/scripts/main.js"></script>
 </body>
-</html> 
+</html>

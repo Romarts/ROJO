@@ -114,6 +114,7 @@ h1, h2, h3 {
   position: relative;  /* Ele ocupa o espaço no topo, em vez de flutuar */
   padding: 20px 60px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 100%;
 }
 
 .header-solid .nav a {
@@ -445,29 +446,31 @@ h1, h2, h3 {
 /* Card Principal */
 .product-card {
     background: #ffffff;
-    padding: 20px;
-    border: 1px solid #eee;
+    padding: 30px;
+    border: 1px solid #f2f2f2;
     text-align: center;
     transition: all 0.4s ease;
     display: flex;
     flex-direction: column;
+    min-height: 520px; /* Garante que todos os cards tenham o mesmo tamanho */
     justify-content: space-between;
 }
 
 /* Ajuste da Imagem (Para não ficar com borda quebrada) */
 .product-image {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Garante que seja sempre um quadrado */
-    background-color: #f9f9f9;
-    margin-bottom: 20px;
+    height: 250px; /* Altura fixa para as fotos */
+    background-color: #fcfcfc;
+    margin-bottom: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .product-image img {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 80%;
+    max-height: 80%;
     object-fit: contain;
 }
 
@@ -513,8 +516,78 @@ h1, h2, h3 {
     color: #1a1a1a;
 }
 
+.btn-checkout-final:hover {
+    background-color: #D4AF37 !important;
+    color: #1a1a1a !important;
+}
+
 /* =========================================
-   9. RESPONSIVIDADE (MOBILE)
+   8. ALERTA DE SUCESSO
+   ========================================= */
+
+.success-icon {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border: 2px solid #D4AF37;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    animation: scaleUp 0.5s ease-out;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* =========================================
+   9. ALERTA DE ADICIONADO AO CARRINHO
+   ========================================= */
+
+#toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #1a1a1a;
+    color: #D4AF37; /* Dourado ROJO */
+    padding: 15px 25px;
+    border-radius: 4px;
+    border-left: 4px solid #D4AF37;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 2000;
+    display: none; /* Escondido por padrão */
+    animation: slideIn 0.5s ease forwards;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.nav-cart {
+    position: relative;
+}
+
+#cart-count {
+    background-color: #D4AF37;
+    color: #1a1a1a;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    display: none;
+}
+
+/* =========================================
+   10. RESPONSIVIDADE (MOBILE)
    ========================================= */
 @media (max-width: 768px) {
   .nav { 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho | ROJO Perfumes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/styles/style.css">
+</head>
+
+<div id="header-placeholder"></div>
+
+<body class="login-page">
+
+    <main class="login-container">
+        <div class="login-header">
+            <h2>Sua Seleção</h2>
+            <p>Fragrâncias exclusivas reservadas para você</p>
+        </div>
+
+        <ul id="cart-list" class="cart-list"></ul>
+        <div id="cart-footer-actions"></div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="colecao.html" style="color: #D4AF37; text-decoration: none; font-size: 14px; font-weight: 600;">← Voltar para a Coleção</a>
+        </div>
+    </main>
+
+    <script>
+        function renderCart() {
+            const cartList = document.getElementById("cart-list");
+            const footerActions = document.getElementById("cart-footer-actions");
+            // USANDO A CHAVE "rojo_cart" QUE FUNCIONOU NO TESTE
+            const cart = JSON.parse(localStorage.getItem("rojo_cart")) || [];
+
+            if (cart.length === 0) {
+                cartList.innerHTML = "<p style='text-align:center; padding:40px; color:#888;'>Seu carrinho está vazio.</p>";
+                footerActions.innerHTML = "";
+                return;
+            }
+
+            let html = "";
+            let total = 0;
+
+            cart.forEach((product, index) => {
+                html += `
+                    <li class="cart-item">
+                        <div class="cart-item-info">
+                            <h3>${product.name}</h3>
+                            <button class="btn-remove" onclick="removeItem(${index})">Remover</button>
+                        </div>
+                        <span class="cart-item-price">R$ ${product.price.toFixed(2).replace('.', ',')}</span>
+                    </li>
+                `;
+                total += product.price;
+            });
+
+            cartList.innerHTML = html;
+            
+footerActions.innerHTML = `
+                <div style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 30px; display: flex; flex-direction: column; align-items: center;">
+                    <span style="font-size: 10px; color: #999; letter-spacing: 3px; margin-bottom: 10px; text-transform: uppercase;">Subtotal</span>
+                    <div style="font-size: 32px; font-weight: bold; margin-bottom: 30px; color: #1a1a1a; font-family: 'Playfair Display';">
+                        R$ ${total.toFixed(2).replace('.', ',')}
+                    </div>
+                    
+                    <button onclick="checkout()" style="
+                        background-color: #1a1a1a; 
+                        color: #ffffff; 
+                        border: none; 
+                        padding: 18px 0; 
+                        width: 100%; 
+                        max-width: 350px;
+                        text-transform: uppercase; 
+                        letter-spacing: 2px; 
+                        font-weight: 600; 
+                        font-size: 12px; 
+                        cursor: pointer; 
+                        transition: all 0.3s ease;
+                        font-family: 'Montserrat', sans-serif;
+                    ">
+                        Finalizar Pedido
+                    </button>
+                </div>
+            `;
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem("rojo_cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("rojo_cart", JSON.stringify(cart));
+            renderCart();
+        }
+
+        function checkout() {
+            localStorage.removeItem("rojo_cart");
+            window.location.href = "sucesso.html";
+        }
+
+        window.onload = renderCart;
+
+            function toggleMenu() {
+  const menu = document.getElementById("menu");
+  const btn = document.querySelector(".menu-btn");
+  
+  menu.classList.toggle("active");
+  btn.classList.toggle("open");
+}
+    </script>
+    <script src="/frontend/scripts/main.js"></script>
+    <script src="/frontend/scripts/script.js"></script>
+</body>
+</html>
