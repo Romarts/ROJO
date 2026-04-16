@@ -1,59 +1,86 @@
-// Substitua a função do topo por esta:
+// GESTÃO DO CARRINHO
 function addToCart(nome, preco) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  
-  // Criamos um objeto para que o cart.js consiga ler .name e .price
-  const novoProduto = {
-    name: nome,
-    price: preco
-  };
-  
-  cart.push(novoProduto);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert(nome + " adicionado ao carrinho!");
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name: nome, price: preco });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(nome + " adicionado ao carrinho!");
 }
 
-function explorar() {
-  document.getElementById("colecao").scrollIntoView({ behavior: "smooth" });
+// LOGOUT SEGURO
+function logout() {
+    localStorage.removeItem("rojo_token");
+    localStorage.removeItem("rojo_user");
+    window.location.href = "index.html";
 }
 
-function toggleMenu() {
-  const menu = document.getElementById("menu");
-  const btn = document.querySelector(".menu-btn");
-  
-  menu.classList.toggle("active");
-  btn.classList.toggle("open");
-}
-
-document.querySelectorAll('#menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    const menu = document.getElementById("menu");
-    const btn = document.querySelector(".menu-btn");
-    
-    menu.classList.remove("active");
-    btn.classList.remove("open");
-  });
-});
-
+// CARREGAR PRODUTOS NA VITRINE
 async function carregarProdutos() {
-    const response = await fetch('http://localhost:3000/produtos');
-    const produtos = await response.json();
+    const container = document.getElementById('produtos-container');
+    if (!container) return; 
 
-    const container = document.getElementById('produtos-container'); // Use o ID correto do seu HTML
-    
-    // ESTA É A LINHA QUE RESOLVE A DUPLICAÇÃO:
-    container.innerHTML = ""; 
+    try {
+        // Chamada simples: a rota GET /produtos no seu index.ts não exige login
+        const response = await fetch('http://localhost:3000/produtos');
+        const produtos = await response.json();
 
-    produtos.forEach(produto => {
-        container.innerHTML += `
-            <div class="produto-card">
-                <img src="${produto.image}" alt="${produto.name}">
-                <h3>${produto.name}</h3>
-                <p>${produto.description}</p>
-                <span>R$ ${produto.price.toFixed(2)}</span>
-                <button onclick="addToCart('${produto.name}', ${produto.price})">Adicionar ao Carrinho</button>
-            </div>
-        `;
-    });
+        container.innerHTML = ""; 
+
+        produtos.forEach(p => {
+            container.innerHTML += `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${p.imagemUrl || 'img/perfume-placeholder.jpg'}" alt="${p.nome}">
+                    </div>
+                    <div class="product-info">
+                        <small>Fragrância Exclusiva</small>
+                        <h3>${p.nome}</h3>
+                        <p class="price">R$ ${Number(p.preco).toFixed(2)}</p>
+                        <button class="btn-add-cart" onclick="addToCart('${p.nome}', ${p.preco})">Adicionar</button>
+                    </div>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error("Erro ao carregar a vitrine:", error);
+    }
 }
-carregarProdutos();
+
+// Inicializa a coleção
+document.addEventListener("DOMContentLoaded", carregarProdutos);
+
+// CONFIGURAÇÃO DA INTERFACE DO USUÁRIO
+document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("rojo_token");
+    const user = JSON.parse(localStorage.getItem("rojo_user") || "{}");
+    const loginLink = document.querySelector('a[href="login.html"]');
+
+    if (token && loginLink) {
+        // Muda 'Entrar' para 'Perfil'
+        loginLink.textContent = "Perfil";
+        loginLink.href = "perfil.html"; 
+
+        // Adiciona botão 'Sair' dinamicamente
+        const logoutBtn = document.createElement("a");
+        logoutBtn.textContent = "Sair";
+        logoutBtn.href = "#";
+        logoutBtn.style.marginLeft = "15px";
+        logoutBtn.onclick = (e) => { e.preventDefault(); logout(); };
+        loginLink.parentNode.appendChild(logoutBtn);
+    }
+
+    // Link Admin no Footer
+    if (user.role === "ADMIN") {
+        const footer = document.querySelector("footer") || document.getElementById("footer-placeholder");
+        if (footer) {
+            const adminLink = document.createElement("a");
+            adminLink.href = "admin.html";
+            adminLink.textContent = "Painel Administrativo";
+            adminLink.style.display = "block";
+            adminLink.style.color = "#D4AF37";
+            adminLink.style.marginTop = "10px";
+            footer.appendChild(adminLink);
+        }
+    }
+    
+    carregarProdutos();
+});

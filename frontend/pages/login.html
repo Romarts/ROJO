@@ -15,25 +15,28 @@
             <p>Introduza as suas credenciais para aceder</p>
         </div>
 
-        <form id="loginForm" class="login-form">
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="email" id="email" required placeholder="seu@email.com">
-            </div>
-            
-            <div class="form-group">
-                <label for="senha">Palavra-passe</label>
-                <input type="password" id="senha" required placeholder="••••••••">
-            </div>
-
-            <div id="loginError" class="error-msg" style="display: none; color: #7a1b1b; font-size: 14px; margin-bottom: 15px; text-align: center;"></div>
-
-            <button type="submit" class="btn-three">Entrar</button>
-            <p class="form-footer">Não tem conta? <a href="register.html">Cadastre-se</a></p>
-        </form>
+<form id="loginForm" class="login-form">
+    <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" required placeholder="seu@email.com">
     </div>
     
-    <script src="login.js"></script>
+    <div class="form-group">
+        <label for="senha">Palavra-passe</label>
+        <div style="position: relative;">
+            <input type="password" id="password" required placeholder="••••••••">
+            <button type="button" id="togglePwd" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); border: none; background: none; cursor: pointer;">👁️</button>
+        </div>
+    </div>
+
+    <div id="feedback" class="error-msg" style="color: #7a1b1b; font-size: 14px; margin-bottom: 15px; text-align: center;"></div>
+
+    <button type="submit" id="submitBtn" class="btn-three">Entrar</button>
+    <p class="form-footer">Não tem conta? <a href="register.html">Cadastre-se</a></p>
+</form>
+    </div>
+    
+    <script src="../scripts/login.js"></script>
     <div id="footer-placeholder"></div>
     <script src="/frontend/scripts/script.js"></script>
     <script src="/frontend/scripts/main.js"></script>

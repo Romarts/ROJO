@@ -71,4 +71,14 @@ try {
       submitBtn.textContent = "Entrar";
     }
   });
+  function logout() {
+    // Limpa o Token e os dados do usuário do navegador
+    localStorage.removeItem("rojo_token");
+    localStorage.removeItem("rojo_user");
+    
+    alert("Você saiu do sistema.");
+    
+    // Redireciona para a home para atualizar os menus
+    window.location.href = "index.html"; 
+}
 });

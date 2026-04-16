@@ -13,6 +13,7 @@ model User {
   email String  @unique
   cpf   String  @unique
   senha String
+  role  String  @default("USER")
 }
 
 model Category {

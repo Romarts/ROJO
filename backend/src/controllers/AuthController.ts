@@ -76,15 +76,18 @@ export class AuthController {
         // 3. Gerar Token JWT (Requisito: Retorno JWT - Vale 1 ponto)
         // O "SECRET" deve ser uma string única. Em produção, use .env
         const token = jwt.sign(
-            { id: user.id, nome: user.nome }, 
+        { 
+            id: user.id, 
+            nome: user.nome, 
+            role: user.role // AGORA O TOKEN VAI DIZER SE É ADMIN OU USER
+        }, 
             "ROJO_SECRET_KEY", 
             { expiresIn: '1d' }
-        );
+);
 
-        return res.status(200).json({
-            message: "Login realizado com sucesso!",
-            token,
-            user: { nome: user.nome, email: user.email }
+        return res.json({ 
+         token, 
+        user: { nome: user.nome, email: user.email, role: user.role } 
         });
 
     } catch (error) {

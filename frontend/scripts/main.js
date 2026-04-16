@@ -31,8 +31,11 @@ function toggleMenu() {
   btn.classList.toggle("open");
 }
 
-fetch('/frontend/components/footer.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('footer-placeholder').innerHTML = data;
-        });
+// No seu main.js, verifique o caminho:
+fetch('../components/footer.html')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('footer-placeholder').innerHTML = data;
+    // IMPORTANTE: Chame a função de verificar Admin SÓ DEPOIS que o footer carregar
+    verificarAdminNoFooter(); 
+  });

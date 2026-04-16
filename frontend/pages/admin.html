@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - ROJO</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; }
+        .admin-container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .form-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        input, textarea { padding: 10px; border: 1px solid #ddd; border-radius: 5px; width: 100%; }
+        .btn-add { background: #28a745; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; grid-column: span 2; }
+        table { width: 100%; border-collapse: collapse; margin-top: 30px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #eee; }
+        th { background: #f4f4f4; }
+        .btn-del { background: #dc3545; color: white; border: none; padding: 6px 12px; cursor: pointer; border-radius: 4px; }
+        .logout { float: right; color: #666; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <a href="index.html" onclick="logout()" class="logout">Sair do Painel</a>
+        <h1>Gerenciamento de Perfumes</h1>
+
+        <div class="form-group">
+            <input type="text" id="prodNome" placeholder="Nome do Perfume">
+            <input type="number" id="prodPreco" placeholder="Preço (ex: 250.00)">
+            <textarea id="prodDesc" placeholder="Descrição do aroma..." style="grid-column: span 2;"></textarea>
+            <button onclick="salvarProduto()" class="btn-add">Cadastrar Novo Perfume</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Descrição</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaProdutos"></tbody>
+        </table>
+    </div>
+    <script src="/frontend/scripts/admin.js"></script>
+    <script src="/frontend/scripts/login.js"></script>
+    <script src="/frontend/scripts/main.js"></script>
+</body>
+</html>

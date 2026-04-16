@@ -3,94 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - ROJO</title>
-    <link rel="stylesheet" href="/frontend/styles/style.css">
+    <title>Coleção - ROJO</title>
+    <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body class="login-page">
 
-<div id="header-placeholder"></div>
+    <div id="header-placeholder"></div>
+
     <main class="container catalog-container">
         <div class="login-header">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
+            <br><br><br><br><br>
             <h2>Nossa Coleção</h2>
             <p>Fragrâncias que definem presença e personalidade</p>
         </div>
 
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="img/perfume1.jpg" alt="Noir Absolu">
-                </div>
-                <div class="product-info">
-                    <small>Masculino</small>
-                    <h3>Noir Absolu</h3>
-                    <p class="price">R$ 489,00</p>
-<button class="btn-add-cart" onclick="addToCart('Noir Absolu', 489.00)">Adicionar</button>                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="img/perfume2.jpg" alt="Rouge Intense">
-                </div>
-                <div class="product-info">
-                    <small>Unissex</small>
-                    <h3>Rouge Intense</h3>
-                    <p class="price">R$ 529,00</p>
-<button class="btn-add-cart" onclick="addToCart('Rouge Intense', 529.00)">Adicionar</button>                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="img/perfume3.jpg" alt="Fleur Délicate">
-                </div>
-                <div class="product-info">
-                    <small>Feminino</small>
-                    <h3>Fleur Délicate</h3>
-                    <p class="price">R$ 399,00</p>
-                    <button class="btn-add-cart" onclick="addToCart('Fleur Délicate', 399.00)">Adicionar</button>
-                </div>
-            </div>
+        <div id="produtos-container" class="product-grid">
+            <p style="color: white; text-align: center; grid-column: span 3;">Carregando fragrâncias...</p>
         </div>
     </main>
     
-<div id="footer-placeholder"></div>
+    <div id="footer-placeholder"></div>
 
-<div id="toast" style="display:none; position: fixed; bottom: 30px; right: 30px; background: #1a1a1a; color: #D4AF37; padding: 15px 25px; border-left: 4px solid #D4AF37; z-index: 9999; font-family: Montserrat, sans-serif; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-    Item adicionado!
-</div>
+    <div id="toast" style="display:none; position: fixed; bottom: 30px; right: 30px; background: #1a1a1a; color: #D4AF37; padding: 15px 25px; border-left: 4px solid #D4AF37; z-index: 9999; font-family: Montserrat, sans-serif; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        Item adicionado ao carrinho!
+    </div>
 
-<script>
-function addToCart(name, price) {
-    // Busca o carrinho ou cria um novo
-    let cart = JSON.parse(localStorage.getItem("rojo_cart")) || [];
-
-    // Adiciona o item
-    cart.push({ name: name, price: price });
-
-    // Salva na chave correta
-    localStorage.setItem("rojo_cart", JSON.stringify(cart));
-
-    // Mostra o seu Toast (Aviso)
-    const toast = document.getElementById("toast");
-    if (toast) {
-        toast.style.display = "block";
-        setTimeout(() => { toast.style.display = "none"; }, 3000);
-    }
-}
-    document.addEventListener("DOMContentLoaded", updateCartCount);
-
-    function toggleMenu() {
-  const menu = document.getElementById("menu");
-  const btn = document.querySelector(".menu-btn");
-  
-  menu.classList.toggle("active");
-  btn.classList.toggle("open");
-}
-</script>
-<script src="/frontend/scripts/main.js"></script>
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/main.js"></script>
 </body>
 </html>
