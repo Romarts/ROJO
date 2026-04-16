@@ -1,42 +1,42 @@
 import { Request, Response } from 'express';
-import { ProductRepository } from '../repositories/ProductRepository';
+import { PrismaClient } from '@prisma/client';
 
-// Instanciamos o repositório para falar com o banco real
-const productRepository = new ProductRepository();
+const prisma = new PrismaClient();
 
 export class ProductController {
   
-  // O "R" do CRUD - Agora busca do Prisma (Banco SQLite)
+  // O "R" do CRUD - Busca do Banco (Prisma)
   public async listAll(req: Request, res: Response) {
     try {
-      const produtos = await productRepository.findAll();
-      return res.status(200).json(produtos);
+      // Busca todos os produtos e já inclui os dados da Categoria vinculada!
+      const produtos = await prisma.product.findMany({
+        include: {
+          category: true 
+        }
+      });
+      res.status(200).json(produtos);
     } catch (error) {
-      return res.status(500).json({ message: "Erro ao buscar perfumes no banco." });
+      res.status(500).json({ error: "Erro ao buscar produtos" });
     }
   }
 
-  // O "C" do CRUD - Agora salva no Prisma (Banco SQLite)
+  // O "C" do CRUD - Salva no Banco (Prisma)
   public async create(req: Request, res: Response) {
     try {
-      const { nome, preco, categoryId, descricao } = req.body;
+      const { nome, preco, descricao, categoryId } = req.body;
 
-      // Validação rápida (Boa prática!)
-      if (!nome || !preco || !categoryId) {
-        return res.status(400).json({ message: "Campos obrigatórios: nome, preco, categoryId" });
-      }
-
-      const novo = await productRepository.create({
-        nome,
-        preco: Number(preco), // Garante que o preço seja número
-        categoryId: Number(categoryId),
-        descricao
+      const novoProduto = await prisma.product.create({
+        data: {
+          nome,
+          preco: Number(preco),
+          descricao,
+          categoryId: Number(categoryId)
+        }
       });
 
-      return res.status(201).json(novo);
+      res.status(201).json(novoProduto);
     } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: "Erro ao criar o perfume." });
+      res.status(500).json({ error: "Erro ao criar produto" });
     }
   }
 }
