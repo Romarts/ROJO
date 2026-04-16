@@ -10,5 +10,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "seed.ts"]
+  "exclude": ["node_modules", "prisma/seed.ts"]
 }

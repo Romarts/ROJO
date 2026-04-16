@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import { ProductController } from './controllers/ProductController';
 import { UserController } from './controllers/UserController';
 
+
 class App {
   public app: Application;
   private userController: UserController;
