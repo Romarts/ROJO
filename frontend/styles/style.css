@@ -4,20 +4,25 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Garante que padding não aumente o tamanho dos elementos */
 }
 
 html, body {
   width: 100%;
-  overflow-x: hidden; /* Mata a linha branca lateral */
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden; /* Evita que a página balance para os lados */
 }
 
-   body {
-  margin: 0;
-  font-family: "Merriweather", serif;
-  background: #faf7f2;
-  color: #1a1a1a;
-  line-height: 1.6;
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1; /* Isso faz o conteúdo principal "empurrar" o footer para baixo */
 }
 
 h1, h2, h3 {
@@ -62,7 +67,7 @@ h1, h2, h3 {
 }
 
 /* =========================================
-   3. COMPONENTES (BOTÕES)
+   3. COMPONENTES
    ========================================= */
 .btn-three {
   color: #FFF;
@@ -92,6 +97,61 @@ h1, h2, h3 {
   color: #000;
 }
 
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px; /* Espaço para o olho não ficar em cima do texto */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Criando o visual do olho com CSS (mais limpo que imagem) */
+.eye-icon {
+    width: 20px;
+    height: 12px;
+    border: 2px solid #999;
+    border-radius: 75% 15%;
+    position: relative;
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+}
+
+.eye-icon::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #999;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Estilo para quando a senha estiver visível (olho riscado ou cor diferente) */
+.toggle-password.visible .eye-icon {
+    border-color: #D4AF37;
+}
+.toggle-password.visible .eye-icon::before {
+    background: #D4AF37;
+}
+
 /* =========================================
    4. CABEÇALHO E NAVEGAÇÃO
    ========================================= */
@@ -110,11 +170,29 @@ h1, h2, h3 {
 }
 
 .site-header.header-solid {
-  background: #1a1a1a; /* Cinza muito escuro, quase preto */
-  position: relative;  /* Ele ocupa o espaço no topo, em vez de flutuar */
+  background: #1a1a1a;
+  
+  /* Força a barra a ignorar o "aperto" do body flex */
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%; /* Ocupa 100% da largura do body */
+  
   padding: 20px 60px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box; /* Impede que o padding lateral empurre a barra para fora */
+  z-index: 1000;
+}
+
+/* Garante que o conteúdo da página não fique escondido atrás do header absolute */
+body.login-page {
+  padding-top: 80px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .header-solid .nav a {
@@ -177,7 +255,7 @@ h1, h2, h3 {
    ========================================= */
 /* Hero Section */
 .hero {
-  background: url("imagens/Apresentacao.png") top center/cover no-repeat;
+  background: url("/frontend/imagens/Apresentacao.png") top center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -270,15 +348,27 @@ h1, h2, h3 {
    6. RODAPÉ (FOOTER)
    ========================================= */
 .site-footer {
-  width: 100%;
-  background: #0d0d0d;
-  color: #f0f0f0;
-  text-align: center;
-  padding: 35px;
-  font-size: 14px;
-  border-top: 1px solid rgba(212,175,55,0.3);
+    width: 100vw; /* Ocupa a largura total da janela (viewport) */
+    position: relative !important;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: #000000;
+    color: #D4AF37;
+    padding: 40px 0;
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.site-footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
 /* =========================================
    7. PÁGINA DE LOGIN / REGISTRO E CARRINHO
    ========================================= */

@@ -1,32 +1,42 @@
 import { Request, Response } from 'express';
+import { ProductRepository } from '../repositories/ProductRepository';
 
-// Interface para seguir o padrão TypeScript
-interface Produto {
-  id: number;
-  nome: string;
-  categoria: string;
-  preco: number;
-}
+// Instanciamos o repositório para falar com o banco real
+const productRepository = new ProductRepository();
 
 export class ProductController {
-  // Seus produtos "padrão" agora vivem no servidor
-  private static produtos: Produto[] = [
-    { id: 1, nome: "Noir Absolu", categoria: "Masculino", preco: 489 },
-    { id: 2, nome: "Rouge Intense", categoria: "Unissex", preco: 529 },
-    { id: 3, nome: "Fleur Délicate", categoria: "Feminino", preco: 399 },
-    { id: 4, nome: "Jardin Secret", categoria: "Unissex", preco: 459 }
-  ];
-
-  // Listar todos (O "R" do CRUD - Read)
-  public static getAll(req: Request, res: Response) {
-    res.json(this.produtos);
+  
+  // O "R" do CRUD - Agora busca do Prisma (Banco SQLite)
+  public async listAll(req: Request, res: Response) {
+    try {
+      const produtos = await productRepository.findAll();
+      return res.status(200).json(produtos);
+    } catch (error) {
+      return res.status(500).json({ message: "Erro ao buscar perfumes no banco." });
+    }
   }
 
-  // Criar novo (O "C" do CRUD - Create)
-  public static create(req: Request, res: Response) {
-    const { nome, categoria, preco } = req.body;
-    const novo = { id: Date.now(), nome, categoria, preco };
-    ProductController.produtos.push(novo);
-    res.status(201).json(novo);
+  // O "C" do CRUD - Agora salva no Prisma (Banco SQLite)
+  public async create(req: Request, res: Response) {
+    try {
+      const { nome, preco, categoryId, descricao } = req.body;
+
+      // Validação rápida (Boa prática!)
+      if (!nome || !preco || !categoryId) {
+        return res.status(400).json({ message: "Campos obrigatórios: nome, preco, categoryId" });
+      }
+
+      const novo = await productRepository.create({
+        nome,
+        preco: Number(preco), // Garante que o preço seja número
+        categoryId: Number(categoryId),
+        descricao
+      });
+
+      return res.status(201).json(novo);
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Erro ao criar o perfume." });
+    }
   }
 }

@@ -34,30 +34,37 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.disabled = true;
     submitBtn.textContent = "Entrando...";
 
-  try {
-      const res = await fetch("http://localhost:3000/login", { // Ajuste 1: URL completa
+try {
+      const res = await fetch("http://localhost:3000/login", { 
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           email: email, 
-          senha: password // Ajuste 2: 'senha' para bater com o Backend
+          senha: password 
         })
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        feedback.textContent = data.mensagem || "Erro ao autenticar."; 
+        // Ajustado para 'message' para bater com o res.status(401).json({ message: "..." })
+        feedback.textContent = data.message || "Erro ao autenticar."; 
         submitBtn.disabled = false;
         submitBtn.textContent = "Entrar";
         return;
       }
 
-        if (data.token) {
+      // Salva o Token JWT (Requisito: Armazenar o token no localstorage)
+      if (data.token) {
         localStorage.setItem("rojo_token", data.token);
       }
-      localStorage.setItem("rojo_user", JSON.stringify({ email }));
-      window.location.href = "index.html";
+      
+      // Salva os dados do usuário (Requisito: Utilizar contexto global)
+      // data.user vem do seu AuthController (nome e email)
+      localStorage.setItem("rojo_user", JSON.stringify(data.user));
+      
+      window.location.href = "index.html"; // Redirecionar pra área logada
+
     } catch (err) {
       feedback.textContent = "Erro de conexão. Tente novamente.";
       submitBtn.disabled = false;

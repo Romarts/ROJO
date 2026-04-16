@@ -22,3 +22,17 @@ async function carregarHeader() {
 }
 
 document.addEventListener('DOMContentLoaded', carregarHeader);
+
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  const btn = document.querySelector(".menu-btn");
+  
+  menu.classList.toggle("active");
+  btn.classList.toggle("open");
+}
+
+fetch('/frontend/components/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+        });
